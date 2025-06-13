@@ -4,7 +4,7 @@ deepgram-sdk
 
 fastapi
 uvicorn
-gunivorn==23.0.0
+gunicorn
 
 python-multipart
 python-dotenv
