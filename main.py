@@ -28,11 +28,11 @@ TTT_CONFIG = types.GenerateContentConfig(
     ),
     response_mime_type="application/json",
 )
-gemini = genai.Client()
+gemini = genai.Client('AIzaSyBrBT0AIMlB6cYGSYq0VUZq9rQKegPxwfI')
 
 
 
-deepgram = DeepgramClient()
+deepgram = DeepgramClient('25521c509ad1d7c088e952f1ebdf4ba0cfb49dad')
 options = PrerecordedOptions(
         model="nova-3",
         smart_format=True,
@@ -40,7 +40,7 @@ options = PrerecordedOptions(
 
 
 
-client = SarvamAI(api_subscription_key = os.environ['SARVAM_AI_API'])
+client = SarvamAI(api_subscription_key = 'aae42eb5-dfe1-4717-9311-6764aac3e4c7')
 
 
 
