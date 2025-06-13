@@ -28,11 +28,11 @@ TTT_CONFIG = types.GenerateContentConfig(
     ),
     response_mime_type="application/json",
 )
-gemini = genai.Client('AIzaSyBrBT0AIMlB6cYGSYq0VUZq9rQKegPxwfI')
+gemini = genai.Client(api_key='AIzaSyBrBT0AIMlB6cYGSYq0VUZq9rQKegPxwfI')
 
 
 
-deepgram = DeepgramClient('25521c509ad1d7c088e952f1ebdf4ba0cfb49dad')
+deepgram = DeepgramClient(api_key='25521c509ad1d7c088e952f1ebdf4ba0cfb49dad')
 options = PrerecordedOptions(
         model="nova-3",
         smart_format=True,
