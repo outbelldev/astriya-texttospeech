@@ -1,0 +1,10 @@
+google-genai
+sarvamai
+deepgram-sdk
+
+fastapi
+uvicorn
+gunivorn
+
+python-multipart
+python-dotenv
