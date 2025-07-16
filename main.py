@@ -42,7 +42,7 @@ def stt(file_path):
         
 def ttt(user_id, audio_path = None, user_text = None):
     user_id_in_process = user_id in users_in_process.keys()
-    logger.info(user_text)
+    
     if audio_path:
         user_audio = gemini.files.upload(file = audio_path)
         contents = [user_audio, database_pdf]
@@ -51,7 +51,6 @@ def ttt(user_id, audio_path = None, user_text = None):
         contents = [user_text, database_pdf]
         
     if user_id_in_process:
-        print(f"For user: ", user_id, " previous response is in process.", "\n\n")
         logger.info(f"For user: {user_id} previous response is in process.")
         contents = [users_in_process[user_id]] +  contents
         
@@ -61,11 +60,10 @@ def ttt(user_id, audio_path = None, user_text = None):
         config = config.ttt.config,
     )
     response = json.loads(response.text)
-    print("AI:\n", response, "\n\n")
-    logger.info(response)
+    logger.info(f"User: {user_text}")
+    logger.info(f"AI:\n{response}\n\n")
     
     if response['status'] == "in_process":
-        print(f"For user: ", user_id, " current response is in process.")
         logger.info(f"For user {user_id} current response is in process.")
         users_in_process[user_id] = users_in_process.get(user_id, '') + "User: " + response['user_query'] + "\n" + "AI: " + response['data'] + "\n\n"
         
