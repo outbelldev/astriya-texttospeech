@@ -1,10 +1,9 @@
 google-genai
 sarvamai
-deepgram-sdk
 
 fastapi
 uvicorn
-gunivorn
+gunicorn
 
 python-multipart
 python-dotenv
