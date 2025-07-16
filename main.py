@@ -3,6 +3,7 @@ import data.config as config
 import os
 import json
 from datetime import datetime
+import logging
 #from pydub import AudioSegment
 
 from fastapi import FastAPI, File, UploadFile
@@ -21,7 +22,8 @@ app = FastAPI()
 
 database_pdf = gemini.files.upload(file = "data/treeya_items.pdf")
 users_in_process = {}
-
+logger = logging.getLogger(__name__)
+logging.basicConfig(level = logging.INFO)
 
 
 def stt(file_path):
@@ -52,8 +54,6 @@ def ttt(user_id, audio_path = None, user_text = None):
         print(f"For user: ", user_id, " previous response is in process.", "\n\n")
         contents = [users_in_process[user_id]] +  contents
         
-    print(contents)
-        
     response = gemini.models.generate_content(
         model = config.ttt.model,
         contents = contents,
@@ -61,6 +61,7 @@ def ttt(user_id, audio_path = None, user_text = None):
     )
     response = json.loads(response.text)
     print("AI:\n", response, "\n\n")
+    logger.info(response)
     
     if response['status'] == "in_process":
         print(f"For user: ", user_id, " current response is in process.")
@@ -81,6 +82,8 @@ def ttt(user_id, audio_path = None, user_text = None):
 async def upload_audio(file: Optional[UploadFile] = File(None),
                        text: Optional[str] = Form(None),
                        user_id: str = Form(...)):
+
+        logger.info('function hit')
     
         if file:
             contents = await file.read()                          #ogg_version = AudioSegment.from_ogg("never_gonna_give_you_up.ogg")
